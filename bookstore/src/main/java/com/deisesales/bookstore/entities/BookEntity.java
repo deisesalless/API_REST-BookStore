@@ -1,8 +1,6 @@
 package com.deisesales.bookstore.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,6 +10,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
+@Entity
+@Table(name = "tb_book")
 public class BookEntity implements Serializable {
 
     @Id
