@@ -1,2 +1,1 @@
-INSERT INTO tb_book (name)
-VALUES ('Livo1');
+INSERT INTO tb_book (name, author_ID) VALUES ('Livro 1', 1), ('Livro 2', 2), ('Livro 3', 1);

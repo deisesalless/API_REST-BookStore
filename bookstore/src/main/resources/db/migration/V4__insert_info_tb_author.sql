@@ -1,0 +1,1 @@
+INSERT INTO tb_author (name) VALUES ('William Shakespeare'), ('Charles Dickens');

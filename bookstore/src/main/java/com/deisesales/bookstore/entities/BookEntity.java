@@ -19,5 +19,8 @@ public class BookEntity implements Serializable {
     private Long id;
 
     private String name;
-//    private Author author;
+
+    @ManyToOne
+    @JoinColumn(name = "author_ID")
+    private AuthorEntity author;
 }
