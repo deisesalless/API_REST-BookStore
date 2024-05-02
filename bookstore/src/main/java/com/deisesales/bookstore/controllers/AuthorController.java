@@ -17,7 +17,7 @@ public class AuthorController {
     private AuthorService service;
 
     @PostMapping
-    public ResponseEntity<AuthorEntity> register(AuthorEntity author) {
+    public ResponseEntity<AuthorEntity> register(@RequestBody AuthorEntity author) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.register(author));
     }
 

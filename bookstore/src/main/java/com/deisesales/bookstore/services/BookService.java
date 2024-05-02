@@ -1,6 +1,7 @@
 package com.deisesales.bookstore.services;
 
 import com.deisesales.bookstore.entities.BookEntity;
+import com.deisesales.bookstore.exceptions.EntityNotFound;
 import com.deisesales.bookstore.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,13 @@ public class BookService {
 
     public BookEntity update(BookEntity book) {
         Optional<BookEntity> newBook = repository.findById(book.getId());
-        updateBook(newBook,  book);
-        return repository.save(newBook.get());
+
+        if (newBook.isEmpty()) {
+            throw new EntityNotFound("Livro do ID: " + book.getId() + " não encontrado.");
+        } else {
+            updateBook(newBook,  book);
+            return repository.save(newBook.get());
+        }
     }
 
     public void updateBook(Optional<BookEntity> newBook, BookEntity book) {
@@ -38,6 +44,11 @@ public class BookService {
 
     public BookEntity findByID(Long id) {
         Optional<BookEntity> book = repository.findById(id);
-        return book.get();
+
+        if (book.isEmpty()) {
+            throw new EntityNotFound("Livro do ID: " + id + " não encontrado.");
+        } else {
+            return book.get();
+        }
     }
 }

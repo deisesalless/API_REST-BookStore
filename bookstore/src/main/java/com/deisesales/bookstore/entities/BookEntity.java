@@ -1,5 +1,6 @@
 package com.deisesales.bookstore.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +23,6 @@ public class BookEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "author_ID")
+    @JsonIgnore
     private AuthorEntity author;
 }

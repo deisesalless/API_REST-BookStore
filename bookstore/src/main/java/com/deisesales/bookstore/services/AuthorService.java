@@ -1,6 +1,7 @@
 package com.deisesales.bookstore.services;
 
 import com.deisesales.bookstore.entities.AuthorEntity;
+import com.deisesales.bookstore.exceptions.EntityNotFound;
 import com.deisesales.bookstore.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,13 @@ public class AuthorService {
 
     public AuthorEntity update(AuthorEntity author) {
         Optional<AuthorEntity> newAuthor = repository.findById(author.getId());
-        updateAuthor(newAuthor, author);
-        return repository.save(newAuthor.get());
+
+        if (newAuthor.isEmpty()) {
+            throw new EntityNotFound("Autor do ID: " + author.getId() + " não encontrado.");
+        } else {
+            updateAuthor(newAuthor, author);
+            return repository.save(newAuthor.get());
+        }
     }
 
     public void updateAuthor(Optional<AuthorEntity> newAuthor, AuthorEntity author) {
@@ -38,6 +44,12 @@ public class AuthorService {
 
     public AuthorEntity findByID(Long id) {
         Optional<AuthorEntity> author = repository.findById(id);
-        return author.get();
+
+        if (author.isEmpty()) {
+            throw new EntityNotFound("Autor do ID: " + id + " não encontrado.");
+        } else {
+            return author.get();
+        }
+
     }
 }
